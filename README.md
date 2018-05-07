@@ -2,4 +2,4 @@
 Exercise of this book is been covered and implemented.
 
 Chapter 1 - Machine Learning Basics (Key tasks, why python)]<br />
-Chapter 2 - Classifying with k-Nearest Neighbors
+Chapter 2 - Classifying with k-Nearest Neighbors.<br />
