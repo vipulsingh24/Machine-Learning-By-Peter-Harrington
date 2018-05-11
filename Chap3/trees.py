@@ -22,6 +22,12 @@ def calcShannonEntropy(dataSet):
 # The higher the entropy the more mixed up the data is.	
 
 def splitDataSet(dataSet, axis, value):
+'''
+dataSet: the whole dataset on which split is to done.
+axis: feature number 0 for first feature, 1 next and so on.
+value: value of feature in each feature
+return split dataset if feature value matches with the value pass
+'''
 	retDataSet = []
 	for featVec in dataSet:
 		if featVec[axis] == value:
@@ -29,3 +35,21 @@ def splitDataSet(dataSet, axis, value):
 			reducedFeatVec.extend(featVec[axis+1 : ])
 			retDataSet.append(reducedFeatVec)
 	return retDataSet 
+
+def chooseBestFeatureToSplit(dataSet):
+	numFeatures = len(dataSet[0]) - 1
+	baseEntropy = calcShannonEntropy(dataSet)
+	bestInfoGain = 0.0; bestFeature = -1
+	for i in range(numFeatures):
+		featList = [example[i] for example in dataSet]
+		uniqueVals = set(featList)
+		newEntropy = 0.0
+		for value in uniqueVals:
+			subDataSet = splitDataSet(dataSet, i, value)
+			prob = len(subDataSet) / float(len(DataSet))
+			newEntropy += prob * calcShannonEntropy(subDataSet)
+		infoGain = baseEntropy - newEntropy
+		if (infoGain > bestInfoGain):
+			bestInfoGain = infoGain
+			bestFeature = i
+	return bestFeature
