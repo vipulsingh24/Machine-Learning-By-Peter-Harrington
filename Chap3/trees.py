@@ -1,4 +1,5 @@
 from math import log
+import operator
 
 def createDataSet():
 	dataset = [[1, 1, 'yes'], [1, 1, 'yes'], [1, 0, 'no'], [0, 1, 'no'], [0, 1, 'no']]
@@ -22,12 +23,12 @@ def calcShannonEntropy(dataSet):
 # The higher the entropy the more mixed up the data is.	
 
 def splitDataSet(dataSet, axis, value):
-'''
-dataSet: the whole dataset on which split is to done.
-axis: feature number 0 for first feature, 1 next and so on.
-value: value of feature in each feature
-return split dataset if feature value matches with the value pass
-'''
+	'''
+	dataSet: the whole dataset on which split is to done.
+	axis: feature number 0 for first feature, 1 next and so on.
+	value: value of feature in each feature
+	return split dataset if feature value matches with the value pass
+	'''
 	retDataSet = []
 	for featVec in dataSet:
 		if featVec[axis] == value:
@@ -46,10 +47,18 @@ def chooseBestFeatureToSplit(dataSet):
 		newEntropy = 0.0
 		for value in uniqueVals:
 			subDataSet = splitDataSet(dataSet, i, value)
-			prob = len(subDataSet) / float(len(DataSet))
+			prob = len(subDataSet) / float(len(dataSet))
 			newEntropy += prob * calcShannonEntropy(subDataSet)
 		infoGain = baseEntropy - newEntropy
 		if (infoGain > bestInfoGain):
 			bestInfoGain = infoGain
 			bestFeature = i
 	return bestFeature
+
+def majorityCnt(classList):
+	classCount = {}
+	for vote in classList:
+		if vote not in classCount.keys():
+			classCount[vote] += 1
+	sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
+	return sortedClassCount[0][0]
