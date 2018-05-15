@@ -42,9 +42,15 @@ def plotNode(nodeTxt, centerPt, parentPt, nodeType):
 def createPlot(inTree):
 	fig = plt.figure(1, facecolor='white')
 	fig.clf()
-	createPlot.ax1 = plt.subplot(111, frameon=False)
-	plotNode('a decision node', (0.5, 0.1), (0.1, 0.5), decisionNode)
-	plotNode('a leaf node', (0.8, 0.1), (0.3, 0.8), leafNode)
+	axprops = dict(xticks=[], yticks=[])
+	createPlot.ax1 = plt.subplot(111, frameon=False, **axprops)
+	plotTree.totalW = float(getNumLeafs(inTree))
+	plotTree.totalD = float(getTreeDeoth(inTree))
+	plot.xOff = -0.5/plotTree.totalW
+	plot.yOff = 1.0
+	plotTree(inTree, (0.5, 1.0), '')
+	#plotNode('a decision node', (0.5, 0.1), (0.1, 0.5), decisionNode)
+	#plotNode('a leaf node', (0.8, 0.1), (0.3, 0.8), leafNode)
 	plt.show()
 
 def getNumLeafs(myTree):
