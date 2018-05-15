@@ -26,9 +26,10 @@ def getNumLeafs(myTree):
 	secondDict = myTree[firstStr]
 	for key in secondDict.keys():
 		if type(secondDict[key]).__name__=='dict':
-			numLeafs = numLeafs + getNumLeafs(secondDict[key])
+			numLeafs += getNumLeafs(secondDict[key])
 		else:
-			numLeafs += 1
+			numLeafs +=1
+	return numLeafs
 
 def getTreeDepth(myTree):
 	maxDepth = 0
