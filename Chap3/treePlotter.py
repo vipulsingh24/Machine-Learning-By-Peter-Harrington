@@ -44,8 +44,8 @@ def createPlot(inTree):
 	fig.clf()
 	axprops = dict(xticks=[], yticks=[])
 	createPlot.ax1 = plt.subplot(111, frameon=False, **axprops)
-	plotTree.totalW = float(getNumLeafs(inTree))
-	plotTree.totalD = float(getTreeDepth(inTree))
+	plotTree.totalW = float(getNumLeafs(inTree))	# Total width or the number of decision nodes in a tree
+	plotTree.totalD = float(getTreeDepth(inTree))	# Total depth of the tree
 	plotTree.xOff = -0.5/plotTree.totalW; plotTree.yOff = 1.0;
 	plotTree(inTree, (0.5,1.0), '')
 	plt.show()

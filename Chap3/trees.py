@@ -1,5 +1,6 @@
 from math import log
 import operator
+import pickle
 
 def createDataSet():
 	dataset = [[1, 1, 'yes'], [1, 1, 'yes'], [1, 0, 'no'], [0, 1, 'no'], [0, 1, 'no']]
@@ -79,3 +80,25 @@ def createTree(dataSet, labels):
 		subLabels = labels[:]
 		myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value), subLabels)
 	return myTree
+
+def classify(inputTree, featLabels, testVec):
+	firstStr = list(inputTree.keys())[0]
+	secondDict = inputTree[firstStr]
+	featIndex = featLabels.index(firstStr)
+	for key in secondDict.keys():
+		if testVec[featIndex] == key:
+			if type(secondDict[key]).__name__ == 'dict':
+				classLabel = classify(secondDict[key], featLabels, testVec)
+			else:
+				classLabel = secondDict[key]
+	return classLabel
+
+def storeTree(inputTree, filename):
+	fw = open(filename, 'wb')
+	pickle.dump(inputTree, fw)
+	fw.close()
+
+def grabTree(filename):
+	fr = open(filename, 'rb')
+	return pickle.load(fr)
+	
