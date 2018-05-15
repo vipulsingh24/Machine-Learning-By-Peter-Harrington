@@ -7,6 +7,11 @@ decisionNode = dict(boxstyle='sawtooth', fc='0.8')
 leafNode = dict(boxstyle='round4', fc='0.8')
 arrow_args = dict(arrowstyle='<-')
 
+def plotMidText(cntrPt, parentPt, txtString):
+	xMid = (parentPt[0] - cntrPt[0]) / 2.0 + cntrPt[0]
+	yMid = (parentPt[1] - cntrPt[1]) / 2.0 + cntrPt[1]
+	createPlot.ax1.text(xMid, yMid, txtString)
+
 def plotNode(nodeTxt, centerPt, parentPt, nodeType):
 	createPlot.ax1.annotate(nodeTxt, xy=parentPt, xycoords='axes fraction',\
 							xytext=centerPt, textcoords='axes fraction', \
