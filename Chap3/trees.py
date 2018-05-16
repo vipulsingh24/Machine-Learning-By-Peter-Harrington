@@ -25,6 +25,7 @@ def calcShannonEntropy(dataSet):
 
 def splitDataSet(dataSet, axis, value):
 	'''
+	Checks how many times the feature value matches with its value
 	dataSet: the whole dataset on which split is to done.
 	axis: feature number 0 for first feature, 1 next and so on.
 	value: value of feature in each feature
@@ -102,3 +103,7 @@ def grabTree(filename):
 	fr = open(filename, 'rb')
 	return pickle.load(fr)
 	
+if __name__ == '__main__':
+    myData, labels = createDataSet()
+    myTree = createTree(myData, labels)
+    print(myData)
