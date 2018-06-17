@@ -37,7 +37,8 @@ def stocGradAscent(dataMatrix, classLabels):
 
 def plotBestFit(wei):
 	import matplotlib.pyplot as plt
-	weights = wei.getA()
+	#weights = wei.getA()
+	weights = wei
 	dataMat, labelMat = loadDataSet()
 	dataArr = np.array(dataMat)
 	n = np.shape(dataArr)[0]
